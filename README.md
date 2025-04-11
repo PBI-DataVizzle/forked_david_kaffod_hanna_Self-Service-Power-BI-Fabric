@@ -1,9 +1,5 @@
 # 👋 Welcome to My Power BI & Fabric Self-Service Journey
 
-![Power BI](https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg#gh-dark-mode-only)  
-![Fabric](https://learn.microsoft.com/en-us/power-bi/media/fabric-logo.svg#gh-dark-mode-only)
-
----
 
 ## ✨ About This Repository
 
@@ -26,14 +22,11 @@ Here you'll find:
 📂 `sessions/`  
 > Slides, handouts, and recaps from conference or internal sessions.
 
-📂 `blog-drafts/`  
-> Markdown versions of blog posts before publishing.
-
 📂 `dax-snippets/`  
 > Handy reusable code blocks, parameter tricks, field formatting, metadata tools.
 
-📂 `fabric-experiments/`  
-> Anything from data pipelines to real-time analytics done in Microsoft Fabric.
+📂 `Tools/`  
+> Anything from Admin portal to Power BI Reports
 
 ---
 
@@ -44,8 +37,6 @@ I believe in:
 - Automating the boring stuff  
 - Telling better stories with insights  
 - Building scalable models that just work™
-
-Whether you're just starting or knee-deep in Direct Lake mode, there’s something here for you!
 
 ---
 
