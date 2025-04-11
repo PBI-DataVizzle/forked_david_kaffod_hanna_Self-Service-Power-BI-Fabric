@@ -1,0 +1,25 @@
+----------------------------------
+-- Calculation Group: 'Figures in'
+----------------------------------
+CALCULATIONGROUP 'Figures in'[Calc],
+    Precedence = 2
+
+    CALCULATIONITEM "Current" = SELECTEDMEASURE( )
+
+    CALCULATIONITEM "In 000's" =
+        IF(
+            NOT ( ISNUMBER( SELECTEDMEASURE( ) ) )
+                || RIGHT( SELECTEDMEASURENAME( ), 1 ) = "%"
+                || SEARCH( "Title", SELECTEDMEASURENAME( ), 1, 0 ) > 0,
+            SELECTEDMEASURE( ),
+            DIVIDE( SELECTEDMEASURE( ), 1000 )
+        )
+
+    CALCULATIONITEM "In mio" =
+        IF(
+            NOT ( ISNUMBER( SELECTEDMEASURE( ) ) )
+                || RIGHT( SELECTEDMEASURENAME( ), 1 ) = "%"
+                || SEARCH( "Title", SELECTEDMEASURENAME( ), 1, 0 ) > 0,
+            SELECTEDMEASURE( ),
+            DIVIDE( SELECTEDMEASURE( ), 1000000 )
+        )

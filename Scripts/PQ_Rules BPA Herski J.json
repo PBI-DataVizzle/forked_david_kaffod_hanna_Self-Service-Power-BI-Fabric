@@ -1,0 +1,242 @@
+[
+  {
+    "ID": "PQ_COMMENT_RULE_ADDCOLUMN_PARTITION",
+    "Name": "[Power Query Steps] Add Comment for Custom Column to Provide Better Documentation",
+    "Category": "Power Query Steps",
+    "Description": "Add Comments for Complicated Steps - For merge steps or adding a custom column, if the previous line does not have a preceding comment line, suggest renaming the columns and/or inserting a comment. (Ref: https://sqlserverbi.blog/2021/02/14/doing-power-bi-the-right-way-4-power-query-design-best-practices/)",
+    "Severity": 3,
+    "Scope": "Partition",
+    "Expression": "\nSourceType.ToString() = \"M\" and Regex.IsMatch(Query,\"/\\*[\\s\\S]*?\\*/|//.*(?:\\r?\\n\\s*)?[^=\\r\\n]*\\s*=\\s*Table\\.(AddColumn)\\([^)]*\\)\") == false and Query.Contains(\"Table.AddColumn\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "PQ_COMMENT_RULE_ADDCOLUMN_NE",
+    "Name": "[Power Query Steps] Add Comment for Add Custom Column to Provide Better Documentation",
+    "Category": "Power Query Steps",
+    "Description": "Add Comments for Complicated Steps - For merge steps or adding a custom column, if the previous line does not have a preceding comment line, suggest renaming the columns and/or inserting a comment. (Ref: https://sqlserverbi.blog/2021/02/14/doing-power-bi-the-right-way-4-power-query-design-best-practices/)",
+    "Severity": 3,
+    "Scope": "NamedExpression",
+    "Expression": "Kind.ToString() = \"M\"  and Regex.IsMatch(Expression,\"/\\*[\\s\\S]*?\\*/|//.*(?:\\r?\\n\\s*)?[^=\\r\\n]*\\s*=\\s*Table\\.(AddColumn)\\([^)]*\\)\") == false and Expression.Contains(\"Table.AddColumn\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "PQ_COMMENT_RULE_NESTEDJOIN_PARTITION",
+    "Name": "[Power Query Steps] Add Comment for Nested Join to Provide Better Documentation",
+    "Category": "Power Query Steps",
+    "Description": "Add Comments for Complicated Steps - For nested joins, if the previous line does not have a preceding comment line, suggest inserting a comment explaining the purpose of the join and ensuring meaningful column names. (Ref: https://sqlserverbi.blog/2021/02/14/doing-power-bi-the-right-way-4-power-query-design-best-practices/)",
+    "Severity": 3,
+    "Scope": "Partition",
+    "Expression": "\nSourceType.ToString() = \"M\" and Regex.IsMatch(Query,\"/\\*[\\s\\S]*?\\*/|//.*(?:\\r?\\n\\s*)?[^=\\r\\n]*\\s*=\\s*Table\\.(NestedJoin)\\([^)]*\\)\") == false and Query.Contains(\"Table.NestedJoin\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "PQ_COMMENT_RULE_NESTEDJOIN_NE",
+    "Name": "[Power Query Steps] Add Comment for Nested Join to Provide Better Documentation",
+    "Category": "Power Query Steps",
+    "Description": "Add Comments for Complicated Steps - For nested joins, if the previous line does not have a preceding comment line, suggest inserting a comment explaining the purpose of the join and ensuring meaningful column names. (Ref: https://sqlserverbi.blog/2021/02/14/doing-power-bi-the-right-way-4-power-query-design-best-practices/)",
+    "Severity": 3,
+    "Scope": "NamedExpression",
+    "Expression": "Kind.ToString() = \"M\"  and Regex.IsMatch(Expression,\"/\\*[\\s\\S]*?\\*/|//.*(?:\\r?\\n\\s*)?[^=\\r\\n]*\\s*=\\s*Table\\.(NestedJoin)\\([^)]*\\)\") == false and Expression.Contains(\"Table.NestedJoin\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "PQ_COMMENT_RULE_JOIN_PARTITION",
+    "Name": "[Power Query Steps] Add Comment for Joins to Provide Better Documentation",
+    "Category": "Power Query Steps",
+    "Description": "Add Comments for Complicated Steps - For Table.Join steps, if the previous line does not have a preceding comment line, suggest inserting a comment explaining the purpose of the join and ensuring meaningful column names. (Ref: https://sqlserverbi.blog/2021/02/14/doing-power-bi-the-right-way-4-power-query-design-best-practices/)",
+    "Severity": 3,
+    "Scope": "Partition",
+    "Expression": "\nSourceType.ToString() = \"M\" and Regex.IsMatch(Query,\"/\\*[\\s\\S]*?\\*/|//.*(?:\\r?\\n\\s*)?[^=\\r\\n]*\\s*=\\s*Table\\.(Join)\\([^)]*\\)\") == false and Query.Contains(\"Table.Join\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "PQ_COMMENT_RULE_JOIN_NE",
+    "Name": "[Power Query Steps] Add Comment for Joins to Provide Better Documentation",
+    "Category": "Power Query Steps",
+    "Description": "Add Comments for Complicated Steps - For Table.Join steps, if the previous line does not have a preceding comment line, suggest inserting a comment explaining the purpose of the join and ensuring meaningful column names. (Ref: https://sqlserverbi.blog/2021/02/14/doing-power-bi-the-right-way-4-power-query-design-best-practices/)",
+    "Severity": 3,
+    "Scope": "NamedExpression",
+    "Expression": "Kind.ToString() = \"M\"  and Regex.IsMatch(Expression,\"/\\*[\\s\\S]*?\\*/|//.*(?:\\r?\\n\\s*)?[^=\\r\\n]*\\s*=\\s*Table\\.(Join)\\([^)]*\\)\") == false and Expression.Contains(\"Table.Join\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "PQ_COMMENT_RULE_TABLEAPPEND_PARTITION",
+    "Name": "[Power Query Steps] Add Comment for Append Query to Provide Better Documentation",
+    "Category": "Power Query Steps",
+    "Description": "Add Comments for Complicated Steps - For appending tables, if the previous line does not have a preceding comment line, suggest inserting a comment explaining the purpose of the append operation and verifying column alignment. (Ref: https://sqlserverbi.blog/2021/02/14/doing-power-bi-the-right-way-4-power-query-design-best-practices/)",
+    "Severity": 3,
+    "Scope": "Partition",
+    "Expression": "\nSourceType.ToString() = \"M\" and Regex.IsMatch(Query,\"/\\*[\\s\\S]*?\\*/|//.*(?:\\r?\\n\\s*)?[^=\\r\\n]*\\s*=\\s*Table\\.(Combine)\\([^)]*\\)\") == false and Query.Contains(\"Table.Combine\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "PQ_COMMENT_RULE_TABLEAPPEND_NE",
+    "Name": "[Power Query Steps] Add Comment for Append Query to Provide Better Documentation",
+    "Category": "Power Query Steps",
+    "Description": "Add Comments for Complicated Steps - For appending tables, if the previous line does not have a preceding comment line, suggest inserting a comment explaining the purpose of the append operation and verifying column alignment. (Ref: https://sqlserverbi.blog/2021/02/14/doing-power-bi-the-right-way-4-power-query-design-best-practices/)",
+    "Severity": 3,
+    "Scope": "NamedExpression",
+    "Expression": "Kind.ToString() = \"M\" and Regex.IsMatch(Expression,\"/\\*[\\s\\S]*?\\*/|//.*(?:\\r?\\n\\s*)?[^=\\r\\n]*\\s*=\\s*Table\\.(Combine)\\([^)]*\\)\") == false and Expression.Contains(\"Table.Combine\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "RENAME_STEPS_THAT_LOOK_SIMILAR_PARTITION",
+    "Name": "[Power Query Steps] Renaming Custom Column Steps That Look Similar",
+    "Category": "Power Query Steps",
+    "Description": "Renaming Steps to Provide Better Documentation - If several steps (variables) end with the number 2 or greater, we should suggest renaming the steps or consolidating the steps for performance and maintainability. For example, if if you add three custom columns in a table the third step is called \"Added Custom Column3\". (Ref: https://sqlserverbi.blog/2021/02/14/doing-power-bi-the-right-way-4-power-query-design-best-practices/)",
+    "Severity": 3,
+    "Scope": "Partition",
+    "Expression": "Regex.Matches(Query,\"#\"\"Added Custom\\d+\"\"\\s=\").Count > 2",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "RENAME_STEPS_THAT_LOOK_SIMILAR_NE",
+    "Name": "[Power Query Steps] Renaming Custom Column Steps That Look Similar",
+    "Category": "Power Query Steps",
+    "Description": "Renaming Steps to Provide Better Documentation - If several steps (variables) end with the number 2 or greater, we should suggest renaming the steps or consolidating the steps for performance and maintainability. For example, if if you add three custom columns in a table the third step is called \"Added Custom Column3\". (Ref: https://sqlserverbi.blog/2021/02/14/doing-power-bi-the-right-way-4-power-query-design-best-practices/)",
+    "Severity": 3,
+    "Scope": "Partition",
+    "Expression": "Regex.Matches(Expression,\"#\"\"Added Custom\\d+\"\"\\s=\").Count > 2",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "SP_RULE_ODATA_PARTITION",
+    "Name": "[SharePoint] For SharePoint List connectors, consider for OData as alternative",
+    "Category": "SharePoint",
+    "Description": "If the table contains the SharePoint List connector, offer that OData may be more efficient to reduce the number of columns retrieved if you can keep the query below 2100 characters. (Ref: https://blog.kerski.tech/bringing-dataops-to-power-bi-part27/)",
+    "Severity": 2,
+    "Scope": "Partition",
+    "Expression": "\nSourceType.ToString() = \"M\"  and Query.Contains(\"SharePoint.Tables\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "SP_SELECTCOLUMNS_PARTITION",
+    "Name": "[SharePoint] For SharePoint List connectors, consider selecting columns to avoid surprise columns",
+    "Category": "SharePoint",
+    "Description": "If you use Table.SelectColumn (Remove Other Columns) you can avoid new columns being introduced into the model when the SharePoint list is introduced.",
+    "Severity": 2,
+    "Scope": "Partition",
+    "Expression": "\nSourceType.ToString() = \"M\" and Query.Contains(\"SharePoint.Tables\") and Query.Contains(\"Table.SelectColumns\") == false",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "SP_RULE_ODATA_NE",
+    "Name": "[SharePoint] For SharePoint List connectors, consider for OData as alternative",
+    "Category": "SharePoint",
+    "Description": "If the table contains the SharePoint List connector, offer that OData may be more efficient to reduce the number of columns retrieved if you can keep the query below 2100 characters. (Ref: https://blog.kerski.tech/bringing-dataops-to-power-bi-part27/)",
+    "Severity": 2,
+    "Scope": "NamedExpression",
+    "Expression": "Kind.ToString() = \"M\"  and Expression.Contains(\"SharePoint.Tables\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "SP_SELECTCOLUMNS_NE",
+    "Name": "[SharePoint] For SharePoint List connectors, consider selecting columns to avoid surprise columns",
+    "Category": "SharePoint",
+    "Description": "If you use Table.SelectColumn (Remove Other Columns) you can avoid new columns being introduced into the model when the SharePoint list is introduced.",
+    "Severity": 2,
+    "Scope": "NamedExpression",
+    "Expression": "Kind.ToString() = \"M\" and Expression.Contains(\"SharePoint.Tables\") and Expression.Contains(\"Table.SelectColumns\") == false",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "TABLE.UNPIVOT_OR_TABLE.UNPIVOTOTHERCOLUMNS_MAY_ELIMINATE_NULL_VALUES_PARTITION",
+    "Name": "[Function Usage] Table.Unpivot or Table.UnpivotOtherColumns may eliminate Null values",
+    "Category": "Function Usage",
+    "Description": "If these functions are used, warn that null values will be removed. Suggest inserting a placeholder for NULL prior to the transform. (Ref: https://gorilla.bi/power-query/unpivot-and-keep-null-values/)",
+    "Severity": 1,
+    "Scope": "Partition",
+    "Expression": "Query.Contains(\"Table.Unpivot(\") or Query.Contains(\"Table.UnpivotOtherColumns(\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "TABLE.UNPIVOT_OR_TABLE.UNPIVOTOTHERCOLUMNS_MAY_ELIMINATE_NULL_VALUES_NE",
+    "Name": "[Function Usage] Table.Unpivot or Table.UnpivotOtherColumns may eliminate Null values 1",
+    "Category": "Function Usage",
+    "Description": "If these functions are used, warn that null values will be removed. Suggest inserting a placeholder for NULL prior to the transform. (Ref: https://gorilla.bi/power-query/unpivot-and-keep-null-values/)",
+    "Severity": 1,
+    "Scope": "NamedExpression",
+    "Expression": "Expression.Contains(\"Table.Unpivot(\") or Expression.Contains(\"Table.UnpivotOtherColumns(\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "TABLE.SORT_SHOULD_USE_TABLE.BUFFER_NE",
+    "Name": "[Function Usage] Table.Sort should use Table.Buffer ",
+    "Category": "Function Usage",
+    "Description": "Using Table.Sort prior to a Table.Group or Table.RemoveDuplicates can lead to unexpected results. Use Table.Buffer to retain sort order. (Ref: https://exceltown.com/en/tutorials/power-bi/power-query-m-language/keep-sorted-table-for-group-by-using-table-buffer/)",
+    "Severity": 3,
+    "Scope": "NamedExpression",
+    "Expression": "Kind.ToString() = \"M\" and RegEx.IsMatch(Expression,\"Table\\.Sort\\([^)]*\\)[\\s\\S]*?(Table\\.Group|Table\\.Distinct)\\(\") and (Expression.Contains(\"Table.Sort(Table.Buffer(\") == false or Expression.Contains(\"Table.Buffer(\") == false)",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "TABLE.SORT_SHOULD_USE_TABLE.BUFFER_PARTITION",
+    "Name": "[Function Usage] Table.Sort should use Table.Buffer ",
+    "Category": "Function Usage",
+    "Description": "Using Table.Sort prior to a Table.Group or Table.RemoveDuplicates can lead to unexpected results. Use Table.Buffer to retain sort order. (Ref: https://exceltown.com/en/tutorials/power-bi/power-query-m-language/keep-sorted-table-for-group-by-using-table-buffer/)",
+    "Severity": 3,
+    "Scope": "Partition",
+    "Expression": "SourceType.ToString() = \"M\" and RegEx.IsMatch(Query,\"Table\\.Sort\\([^)]*\\)[\\s\\S]*?(Table\\.Group|Table\\.Distinct)\\(\") and (Query.Contains(\"Table.Sort(Table.Buffer(\") == false or Query.Contains(\"Table.Buffer(\") == false)",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "NUMBER.ROUND_MAY_HAVE_UNEXPECTED_RESULTS_",
+    "Name": "[Function Usage] Number.Round may have unexpected results ",
+    "Category": "Function Usage",
+    "Description": "Number.Round does banker's rounding by default. Please verify this the intended behavior.  Confirm that  (Ref: https://solveandexcel.ca/2021/03/09/rounding-in-power-query-default-rounding-mode-and-the-binary-decimal-conversion-issue-in-excel/)",
+    "Severity": 1,
+    "Scope": "Partition",
+    "Expression": "SourceType.ToString() = \"M\" and Query.Contains(\"Number.Round(\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "NUMBER.ROUND_MAY_HAVE_UNEXPECTED_RESULTS_NE",
+    "Name": "[Function Usage] Number.Round may have unexpected results ",
+    "Category": "Function Usage",
+    "Description": "Number.Round does banker's rounding by default. Please verify this the intended behavior.  Confirm that  (Ref: https://solveandexcel.ca/2021/03/09/rounding-in-power-query-default-rounding-mode-and-the-binary-decimal-conversion-issue-in-excel/)",
+    "Severity": 1,
+    "Scope": "NamedExpression",
+    "Expression": "Kind.ToString() = \"M\" and Expression.Contains(\"Number.Round(\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "TABLE.TRANSFORMCOLUMNTYPES()_BREAKS_QUERY_FOLDING_PARTITION",
+    "Name": "[Query Folding] Table.TransformColumnTypes() breaks Query Folding",
+    "Category": "Query Folding",
+    "Description": "Check for the existence of that step after the SQL.Database call. This step breaks query folding, suggest using Table.TransformColumns() instead. (Ref: https://pawarbi.github.io/blog/powerquery/m/queryfolding/2022/06/01/query-folding-data-types-changes-powerbi.html)",
+    "Severity": 2,
+    "Scope": "Partition",
+    "Expression": "SourceType.ToString() = \"M\" and RegEx.IsMatch(Query,\"(CommonDataService\\.Database|Sql\\.Database|Sql\\.Databases)\\([^)]*\\)[\\s\\S]*?(Table\\.TransformColumnTypes)\\(\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "TABLE.TRANSFORMCOLUMNTYPES()_BREAKS_QUERY_FOLDING_NE",
+    "Name": "[Query Folding] Table.TransformColumnTypes() breaks Query Folding",
+    "Category": "Query Folding",
+    "Description": "Check for the existence of that step after the SQL.Database call. This step breaks query folding, suggest using Table.TransformColumns() instead. (Ref: https://pawarbi.github.io/blog/powerquery/m/queryfolding/2022/06/01/query-folding-data-types-changes-powerbi.html)",
+    "Severity": 2,
+    "Scope": "NamedExpression",
+    "Expression": "Kind.ToString() = \"M\" and RegEx.IsMatch(Expression,\"(CommonDataService\\.Database|Sql\\.Database|Sql\\.Databases)\\([^)]*\\)[\\s\\S]*?(Table\\.TransformColumnTypes)\\(\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "AVOID_CUSTOM_QUERY_TO_LEVERAGE_QUERY_FOLDER_NE",
+    "Name": "[Query Folding] Avoid Custom Query to Leverage Query Folding",
+    "Category": "Query Folding",
+    "Description": "Avoid Custom Query to Leverage Query Folding - If the Sql.Database is using a custom query, suggest using a view to maintain query folding or make sure EnableFolding option is set to true (Ref: https://data-mozart.com/query-folding-tricks-lies-ultimate-performance-test/)",
+    "Severity": 3,
+    "Scope": "NamedExpression",
+    "Expression": "Kind.ToString() = \"M\" and (Expression.Contains(\"CommonDataService.Database\") or Expression.Contains(\"Sql.Database\")) and Expression.Contains(\"Value.NativeQuery(\") and (Expression.Contains(\"EnabledFolding = true\") == false)",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "AVOID_CUSTOM_QUERY_TO_LEVERAGE_QUERY_FOLDER_PARTITION",
+    "Name": "[Query Folding] Avoid Custom Query to Leverage Query Folding",
+    "Category": "Query Folding",
+    "Description": "Avoid Custom Query to Leverage Query Folding - If the Sql.Database is using a custom query, suggest using a view to maintain query folding or make sure EnableFolding option is set to true (Ref: https://data-mozart.com/query-folding-tricks-lies-ultimate-performance-test/)",
+    "Severity": 3,
+    "Scope": "Partition",
+    "Expression": "SourceType.ToString() = \"M\" and (Query.Contains(\"CommonDataService.Database\") or Query.Contains(\"Sql.Database\")) and Query.Contains(\"Value.NativeQuery(\") and (Query.Contains(\"EnabledFolding = true\") == false)",
+    "CompatibilityLevel": 1200
+  }
+]
