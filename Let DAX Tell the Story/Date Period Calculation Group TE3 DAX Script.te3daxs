@@ -1,0 +1,127 @@
+-----------------------------------
+-- Calculation Group: 'Date Slicer'
+-----------------------------------
+CALCULATIONGROUP 'Date Slicer'[Date slicer column]    , Precedence = 2
+
+    CALCULATIONITEM "Last 30 Days" = 
+        VAR __Isdatesfiltered =
+            CALCULATE( ISFILTERED( 'Date'[Date] ), ALLSELECTED( ) )
+        VAR _Day = 30
+        VAR __Result =
+            IF(
+                __Isdatesfiltered,
+                SELECTEDMEASURE( ),
+                CALCULATE(
+                    SELECTEDMEASURE( ),
+                    KEEPFILTERS(
+                        DATESINPERIOD( 'Date'[Date], TODAY( ), -_Day, DAY )
+                    )
+                )
+            )
+        RETURN
+            __Result
+        , Ordinal = 0
+
+    CALCULATIONITEM "Last 3 Months" = 
+        VAR __Isdatesfiltered =
+            CALCULATE( ISFILTERED( 'Date'[Date] ), ALLSELECTED( ) )
+        VAR _Day = 90
+        VAR __Result =
+            IF(
+                __Isdatesfiltered,
+                SELECTEDMEASURE( ),
+                CALCULATE(
+                    SELECTEDMEASURE( ),
+                    KEEPFILTERS(
+                        DATESINPERIOD( 'Date'[Date], TODAY( ), -_Day, DAY )
+                    )
+                )
+            )
+        RETURN
+            __Result
+        , Ordinal = 1
+
+    CALCULATIONITEM "Last 6 Months" = 
+        VAR __Isdatesfiltered =
+            CALCULATE( ISFILTERED( 'Date'[Date] ), ALLSELECTED( ) )
+        VAR __Day = 180
+        VAR __Result =
+            IF(
+                __Isdatesfiltered,
+                SELECTEDMEASURE( ),
+                CALCULATE(
+                    SELECTEDMEASURE( ),
+                    KEEPFILTERS(
+                        DATESINPERIOD( 'Date'[Date], TODAY( ), -__Day, DAY )
+                    )
+                )
+            )
+        RETURN
+            __Result
+        , Ordinal = 2
+
+    CALCULATIONITEM "Current Year" = 
+        VAR __Isdatesfiltered =
+            CALCULATE( ISFILTERED( 'Date'[Date] ), ALLSELECTED( ) )
+        VAR __Result =
+            IF(
+                __Isdatesfiltered,
+                SELECTEDMEASURE( ),
+                CALCULATE(
+                    SELECTEDMEASURE( ),
+                    KEEPFILTERS( DATESYTD( 'Date'[Date] ) )
+                )
+            )
+        RETURN
+            __Result
+        , Ordinal = 3
+
+    CALCULATIONITEM "Last Year" = 
+        VAR __Isdatesfiltered =
+            CALCULATE( ISFILTERED( 'Date'[Date] ), ALLSELECTED( ) )
+        VAR __Result =
+            IF(
+                __Isdatesfiltered,
+                SELECTEDMEASURE( ),
+                CALCULATE(
+                    SELECTEDMEASURE( ),
+                    KEEPFILTERS(
+                        SAMEPERIODLASTYEAR( DATESYTD( 'Date'[Date] ) )
+                    )
+                )
+            )
+        RETURN
+            __Result
+        , Ordinal = 4
+
+    CALCULATIONITEM "All" = 
+        VAR __Isdatesfiltered =
+            CALCULATE( ISFILTERED( 'Date'[Date] ), ALLSELECTED( ) )
+        VAR __Result =
+            IF(
+                __Isdatesfiltered,
+                SELECTEDMEASURE( ),
+                CALCULATE(
+                    SELECTEDMEASURE( ),
+                    REMOVEFILTERS( 'Date'[Date] )
+                )
+            )
+        RETURN
+            __Result
+        , Ordinal = 5
+
+    CALCULATIONITEM "Custom" = 
+        VAR __Isdatesfiltered =
+            CALCULATE( ISFILTERED( 'Date'[Date] ), ALLSELECTED( ) )
+        VAR __Result =
+            IF(
+                __Isdatesfiltered,
+                SELECTEDMEASURE( ),
+                CALCULATE(
+                    SELECTEDMEASURE( ),
+                    REMOVEFILTERS( 'Date'[Date] )
+                )
+            )
+        RETURN
+            __Result
+        , Ordinal = 6
