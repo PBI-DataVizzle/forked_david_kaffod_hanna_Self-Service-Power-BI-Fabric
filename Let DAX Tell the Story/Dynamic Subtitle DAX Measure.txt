@@ -1,0 +1,16 @@
+Revenue Dynamic Subtitle = 
+-- For numeric measure-- 
+ VAR _KPIvalue = FORMAT([Revenue], "0,0")
+ VAR _KPIvalueLY = FORMAT([Revenue LY], "0,0")
+ VAR _KPIvaluediff = DIVIDE(_KPIvalue - _KPIvalueLY, _KPIvalue)
+ VAR _KPIPct = FORMAT(_KPIvaluediff , "+0.0%; -0.0%" )
+ VAR _SelectedYearFromSlicer = SELECTEDVALUE('Date'[Year])
+ VAR _ComparisonYear = _SelectedYearFromSlicer - 1
+ VAR _KPIicon = IF( _KPIvaluediff >= 0 ,"▲","▼")
+
+ VAR _Result =
+_KPIicon & _KPIPct & " | " & _SelectedYearFromSlicer & " vs. " & _ComparisonYear & " | " & _KPIvalue & " vs. " & _KPIvalueLY
+
+
+ RETURN
+ _Result
