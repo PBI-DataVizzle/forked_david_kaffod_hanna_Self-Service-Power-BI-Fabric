@@ -1,0 +1,32 @@
+-------------------------------
+-- Measure: [Revenue LY Diff %]
+-------------------------------
+MEASURE 'Finance Transactions'[Revenue LY Diff %] =
+    VAR _KPI = [Revenue]
+    VAR _KPILY = [Revenue LY]
+    VAR _Result = DIVIDE( _KPI - _KPILY, _KPI )
+    RETURN
+        _Result
+
+        /* Insert below into Format for measure
+            
+             ▲ 0.0\ %;▼ -0.0\ %;▲ 0.0\ %
+            
+             */
+        ,
+    FormatString = "▲ 0.0\ %;▼ -0.0\ %;▲ 0.0\ %"
+
+---------------------------
+-- Measure: [LY diff Color]
+---------------------------
+MEASURE 'Finance Transactions'[LY diff Color] = IF( [Revenue LY Diff %] > 0, "good", "bad" )
+
+------------------
+-- Measure: [good]
+------------------
+MEASURE 'Finance Transactions'[good] = "good"
+
+-----------------
+-- Measure: [bad]
+-----------------
+MEASURE 'Finance Transactions'[bad] = "bad"
