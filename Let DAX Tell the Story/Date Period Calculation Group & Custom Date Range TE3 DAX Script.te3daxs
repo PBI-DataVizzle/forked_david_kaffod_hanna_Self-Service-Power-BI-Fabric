@@ -1,0 +1,14 @@
+--------------------------------------------
+-- Measure: [Title Custom Date Slicer State]
+--------------------------------------------
+MEASURE 'Date Slicer'[Title Custom Date Slicer State] = 
+    IF(
+        SELECTEDVALUE('Date Slicer'[Date slicer column]) = "Custom",
+        "Choose a custom date range",
+        "Custom selection disabled")
+
+---------------------------------------
+-- Measure: [Filter Date Slicer Custom]
+---------------------------------------
+MEASURE 'Date Slicer'[Filter Date Slicer Custom] = IF( SELECTEDVALUE ('Date Slicer'[Date slicer column] ) = "Custom", 1, 0 )
+    , FormatString = "0"
