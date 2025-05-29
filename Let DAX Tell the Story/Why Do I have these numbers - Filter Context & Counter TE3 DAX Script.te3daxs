@@ -1,0 +1,49 @@
+-------------------------------------
+-- Measure: [Filter Context Footnote]
+-------------------------------------
+MEASURE 'Finance Transactions'[Filter Context Footnote] = 
+    "Filters applied: Period: " 
+        & MIN('Date'[Date]) & " - " & MAX('Date'[Date])
+    
+        & IF (
+            ISFILTERED ( Segment[Product] ),
+            "  |  Product: "
+                & IF (
+                    HASONEFILTER ( Segment[Product] ),
+                    SELECTEDVALUE ( Segment[Product] ),
+                    "Multiple values"
+                )
+        )
+        & IF (
+            ISFILTERED ( Country[Country] ),
+            "  |  Country Name: "
+                & IF (
+                    HASONEFILTER ( Country[Country] ),
+                    SELECTEDVALUE ( Country[Country] ),
+                    "Multiple values"
+                )
+        )
+
+-----------------------------------------
+-- Measure: [Filter selectings (counter)]
+-----------------------------------------
+MEASURE 'Finance Transactions'[Filter selectings (counter)] = 
+    VAR _Date = IF( ISFILTERED( 'Date'[Year]), 1, 0)
+    VAR _Product = IF( ISFILTERED( Segment[Product]), 1, 0)
+    VAR _Country = IF( ISFILTERED( Country[Country]), 1, 0)
+    
+    VAR _List =
+    {
+        _Date,
+        _Product,
+        _Country
+    }
+    
+    VAR _Result =
+        SUMX(
+            _List,[Value]
+        )
+    RETURN
+        FORMAT(
+            _Result, "0"
+        )
