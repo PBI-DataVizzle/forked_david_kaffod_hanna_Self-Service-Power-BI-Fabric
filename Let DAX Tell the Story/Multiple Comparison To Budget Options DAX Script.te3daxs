@@ -1,0 +1,82 @@
+---------------------
+-- Measure: [Revenue]
+---------------------
+MEASURE 'Finance Transactions'[Revenue] = SUM('Finance Transactions'[ Sales])
+    , DisplayFolder = "Option 1;Option 2;Option 3;Option 4;Option 5"
+
+--------------------
+-- Measure: [Budget]
+--------------------
+MEASURE 'Finance Transactions'[Budget] = SUM(Budget[Budget])
+    , DisplayFolder = "Option 1;Option 2;Option 3;Option 4;Option 5"
+    , FormatString = "#,0"
+
+---------------------------------------
+-- Measure: [Revenue Budget Difference]
+---------------------------------------
+MEASURE 'Finance Transactions'[Revenue Budget Difference] = [Revenue] - [Budget]
+    , DisplayFolder = "Option 1"
+
+-------------------------------
+-- Measure: [Budget diff Color]
+-------------------------------
+MEASURE 'Finance Transactions'[Budget diff Color] = 
+    IF(
+        [Revenue Budget Difference] > 0,
+        "#B3B3B3",
+        "bad"
+    )
+    , DisplayFolder = "Option 1;Option 3"
+
+------------------------------
+-- Measure: [Revenue Positive]
+------------------------------
+MEASURE 'Finance Transactions'[Revenue Positive] = IF([Revenue Budget Difference] >= 0, ABS([Budget]), BLANK())
+    , DisplayFolder = "Option 4"
+    , FormatString = "0"
+
+------------------------------
+-- Measure: [Revenue Negative]
+------------------------------
+MEASURE 'Finance Transactions'[Revenue Negative] = IF([Revenue Budget Difference] < 0, [Budget] + [Revenue Budget Difference], BLANK())
+    , DisplayFolder = "Option 4"
+
+--------------------------
+-- Measure: [Abs negative]
+--------------------------
+MEASURE 'Finance Transactions'[Abs negative] = IF([Revenue Budget Difference] < 0, ABS([Revenue Budget Difference]), BLANK())
+    , DisplayFolder = "Option 4"
+
+--------------------------
+-- Measure: [Abs positive]
+--------------------------
+MEASURE 'Finance Transactions'[Abs positive] = IF([Revenue Budget Difference] >= 0, ABS([Revenue Budget Difference]), BLANK())
+    , DisplayFolder = "Option 4"
+
+-----------------------------------
+-- Measure: [Action Dot Error Bars]
+-----------------------------------
+MEASURE 'Finance Transactions'[Action Dot Error Bars] = 
+    VAR _MaxOverall = 
+        CALCULATE(
+            MAX('Finance Transactions'[ Sales]),
+            ALLSELECTED()
+        )
+    
+    VAR _Threshold = _MaxOverall * -0.05 * 25
+    
+    RETURN
+        IF([Revenue Budget Difference] < 0, _Threshold, BLANK())
+    , DisplayFolder = "Option 5"
+
+---------------------------------------------
+-- Measure: [Budget diff Color action option]
+---------------------------------------------
+MEASURE 'Finance Transactions'[Budget diff Color action option] = 
+    IF(
+        [Revenue Budget Difference] > 0,
+        "light grey",
+        "black"
+    )
+    , DisplayFolder = "Option 5"
+
