@@ -1,0 +1,103 @@
+-----------------------------------------
+-- Measure: [Filter selectings (counter)]
+-----------------------------------------
+MEASURE 'Finance Transactions'[Filter selectings (counter)] = 
+    VAR _Date = IF( ISFILTERED( 'Date'[Year]), 1, 0)
+        VAR _Product = IF( ISFILTERED( Segment[Product]), 1, 0)
+        VAR _Country = IF( ISFILTERED( Country[Country]), 1, 0)
+        VAR _Segment = IF( ISFILTERED( Segment[Segment]), 1, 0)
+        VAR _DiscountBand = IF( ISFILTERED( Segment[Discount Band]), 1, 0)
+        VAR _YearCompleted = IF( ISFILTERED( 'Date'[IsAfterToday]), 1, 0)
+        VAR _DoM = IF( ISFILTERED( 'Date'[Day of Month]), 1, 0)
+        
+        VAR _List =
+        {
+            _Date,
+            _Product,
+            _Country,
+            _Segment,
+            _DiscountBand,
+            _YearCompleted,
+            _DoM
+        }
+        
+        VAR _Result =
+            SUMX(
+                _List,[Value]
+            )
+        RETURN
+            FORMAT(
+                _Result, "0"
+            )
+
+--------------------------------
+-- Measure: [Footer Filter Text]
+--------------------------------
+MEASURE 'Finance Transactions'[Footer Filter Text] = 
+    "Filters applied: Period: " 
+            & MIN('Date'[Date]) & " - " & MAX('Date'[Date])
+        
+            & IF (
+                ISFILTERED ( Segment[Product] ),
+                "  |  Product: "
+                    & IF (
+                        HASONEFILTER ( Segment[Product] ),
+                        SELECTEDVALUE ( Segment[Product] ),
+                        "Multiple values"
+                    )
+            )
+            & IF (
+                ISFILTERED ( Country[Country] ),
+                "  |  Country Name: "
+                    & IF (
+                        HASONEFILTER ( Country[Country] ),
+                        SELECTEDVALUE ( Country[Country] ),
+                        "Multiple values"
+                    )
+            )
+            & IF (
+                ISFILTERED ( Segment[Segment] ),
+                "  |  Segment "
+                    & IF (
+                        HASONEFILTER ( Segment[Segment] ),
+                        SELECTEDVALUE ( Segment[Segment] ),
+                        "Multiple values"
+                    )
+            )
+            & IF (
+                ISFILTERED ( Segment[Discount Band] ),
+                "  |  Discount Band "
+                    & IF (
+                        HASONEFILTER ( Segment[Discount Band] ),
+                        SELECTEDVALUE ( Segment[Discount Band] ),
+                        "Multiple values"
+                    )
+            )
+            & IF (
+                ISFILTERED ( 'Date'[IsAfterToday] ),
+                "  |  Is After Today? "
+                    & IF (
+                        HASONEFILTER ( 'Date'[IsAfterToday] ),
+                        SELECTEDVALUE ( 'Date'[IsAfterToday] ),
+                        "Multiple values"
+                    )
+            )
+            & IF (
+                ISFILTERED ( 'Date'[Day of Month] ),
+                "  |  Day of Month "
+                    & IF (
+                        HASONEFILTER ( 'Date'[Day of Month]),
+                        SELECTEDVALUE ( 'Date'[Day of Month] ),
+                        "Multiple values"
+                    )
+            )
+
+---------------------------------
+-- Measure: [Data Refreshed time]
+---------------------------------
+MEASURE 'Finance Transactions'[Data Refreshed time] = "2025-05-23 10:30:37"
+
+----------------------------------------
+-- Measure: [Button text slicer counter]
+----------------------------------------
+MEASURE 'Finance Transactions'[Button text slicer counter] = "(" & [Filter selectings (counter)] & ") Close and apply slicers"
