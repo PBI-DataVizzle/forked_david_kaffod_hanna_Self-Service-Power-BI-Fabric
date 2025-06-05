@@ -23,7 +23,7 @@ I believe in:
 - Empowering users to do more with data  
 - Automating the boring stuff  
 - Telling better stories with insights  
-- Building scalable models that just work™
+- Building scalable models that just work
 
 ---
 
