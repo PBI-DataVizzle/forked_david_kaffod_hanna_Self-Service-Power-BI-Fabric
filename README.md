@@ -1,7 +1,7 @@
 # 👋 Welcome to My Power BI & Fabric Self-Service Journey
 
 
-## About This repo
+## About this repo
 
 This GitHub space is dedicated to sharing insights, content, and tools from my journey with **Power BI**, **Microsoft Fabric**, and the world of **self-service analytics**.
 
@@ -17,7 +17,7 @@ Here you'll find:
 
 ---
 
-##  Why This Exists
+##  Why all this?
 
 I believe in:
 - Empowering users to do more with data  
@@ -27,7 +27,7 @@ I believe in:
 
 ---
 
-## Get in Touch
+## Get in touch
 
 Feel free to open an issue or reach out if you’ve got questions, ideas, or want to collaborate.  
 You can also follow along on LinkedIn or at events I’m speaking at.
