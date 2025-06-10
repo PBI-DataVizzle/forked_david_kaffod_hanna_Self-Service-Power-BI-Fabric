@@ -1,0 +1,43 @@
+----------------------------------------
+-- Calculated Table: 'Parameter Measure'
+----------------------------------------
+TABLE 'Parameter Measure' = 
+    {
+        ("Revenue", NAMEOF('Finance Transactions'[Revenue]), 0),
+        ("Profit", NAMEOF('Finance Transactions'[Total Profit]), 1),
+        ("Transactions", NAMEOF('Finance Transactions'[# Transactions]), 2)
+    }
+
+-----------------------------------------------
+-- Measure: [KPI Value Switch in Button Slicer]
+-----------------------------------------------
+MEASURE 'Parameter Measure'[KPI Value Switch in Button Slicer] = 
+    SWITCH(
+        TRUE(),
+        SELECTEDVALUE('Parameter Measure'[Parameter Measure Order]) = 0, FORMAT([Revenue], "#,##"),
+        SELECTEDVALUE('Parameter Measure'[Parameter Measure Order]) = 1, FORMAT([Total Profit], "#,##"), 
+        SELECTEDVALUE('Parameter Measure'[Parameter Measure Order]) = 2, FORMAT([# Transactions], "#,##")
+    )
+
+-----------------------------------
+-- Measure: [Title Field Parameter]
+-----------------------------------
+MEASURE 'Parameter Measure'[Title Field Parameter] = MIN('Parameter Measure'[Parameter Measure])
+
+---------------------
+-- Measure: [Revenue]
+---------------------
+MEASURE 'Finance Transactions'[Revenue] = SUM('Finance Transactions'[ Sales])
+    , FormatString = "0"
+
+--------------------------
+-- Measure: [Total Profit]
+--------------------------
+MEASURE 'Finance Transactions'[Total Profit] = SUM('Finance Transactions'[Profit])
+    , FormatString = "0"
+
+----------------------------
+-- Measure: [# Transactions]
+----------------------------
+MEASURE 'Finance Transactions'[# Transactions] = COUNTROWS('Finance Transactions')
+    , FormatString = "#,0"
