@@ -1,0 +1,186 @@
+-------------------------
+-- Measure: [Date period]
+-------------------------
+MEASURE 'Week Date Slicer'[Date period] = MIN( 'Date'[Date] ) & " - " & MAX( 'Date'[Date] )
+
+---------------------------------------
+-- Measure: [Filter Date Slicer Custom]
+---------------------------------------
+MEASURE 'Week Date Slicer'[Filter Date Slicer Custom] =
+    IF(
+        SELECTEDVALUE( 'Week Date Slicer'[Week Date] ) = "Custom",
+        1,
+        0
+    ),
+    FormatString = "0"
+
+--------------------------------------------
+-- Measure: [Title Custom Date Slicer State]
+--------------------------------------------
+MEASURE 'Week Date Slicer'[Title Custom Date Slicer State] =
+    IF(
+        SELECTEDVALUE( 'Week Date Slicer'[Week Date] ) = "Custom",
+        "Choose a custom date range",
+        "Custom selection disabled"
+    )
+
+-------------------------
+-- Measure: [Week period]
+-------------------------
+MEASURE 'Week Date Slicer'[Week period] =
+    MIN( 'Date'[Week & Year] ) & " - "  & MAX( 'Date'[Week & Year] )
+
+----------------------------------------
+-- Calculation Group: 'Week Date Slicer'
+----------------------------------------
+CALCULATIONGROUP 'Week Date Slicer'[Week Date],
+    Precedence = 2
+
+    CALCULATIONITEM "Current Week" =
+        VAR _Isdatesfiltered =
+            CALCULATE( ISFILTERED( 'Date'[Date] ), ALLSELECTED( ) )
+        VAR _Week = MAX( 'Date'[CurrWeekOffset] )
+        VAR _Result =
+            IF(
+                _Isdatesfiltered,
+                SELECTEDMEASURE( ),
+                CALCULATE(
+                    SELECTEDMEASURE( ),
+                    KEEPFILTERS( 'Date'[CurrWeekOffset] = _Week )
+                )
+            )
+        RETURN
+            _Result,
+    Ordinal = 0
+
+    CALCULATIONITEM "LW" =
+        VAR _Isdatesfiltered =
+            CALCULATE( ISFILTERED( 'Date'[Date] ), ALLSELECTED( ) )
+        VAR _MaxWeek =
+            CALCULATE(
+                MAX( 'Date'[CurrWeekOffset] ),
+                'Date'[WeekCompleted] = TRUE
+            )
+        VAR _Week = MAX( 'Date'[CurrWeekOffset] ) - 1
+        VAR _Result =
+            IF(
+                _Isdatesfiltered,
+                SELECTEDMEASURE( ),
+                CALCULATE(
+                    SELECTEDMEASURE( ),
+                    KEEPFILTERS(
+                        'Date'[CurrWeekOffset] >= _Week
+                            && 'Date'[CurrWeekOffset] <= _MaxWeek
+                    )
+                )
+            )
+        RETURN
+            _Result,
+    Ordinal = 1
+
+    CALCULATIONITEM "L2W" =
+        VAR _Isdatesfiltered =
+            CALCULATE( ISFILTERED( 'Date'[Date] ), ALLSELECTED( ) )
+        VAR _MaxWeek =
+            CALCULATE(
+                MAX( 'Date'[CurrWeekOffset] ),
+                'Date'[WeekCompleted] = TRUE
+            )
+        VAR _Week = MAX( 'Date'[CurrWeekOffset] ) - 2
+        VAR _Result =
+            IF(
+                _Isdatesfiltered,
+                SELECTEDMEASURE( ),
+                CALCULATE(
+                    SELECTEDMEASURE( ),
+                    KEEPFILTERS(
+                        'Date'[CurrWeekOffset] >= _Week
+                            && 'Date'[CurrWeekOffset] <= _MaxWeek
+                    )
+                )
+            )
+        RETURN
+            _Result,
+    Ordinal = 2
+
+    CALCULATIONITEM "L4W" =
+        VAR _Isdatesfiltered =
+            CALCULATE( ISFILTERED( 'Date'[Date] ), ALLSELECTED( ) )
+        VAR _MaxWeek =
+            CALCULATE(
+                MAX( 'Date'[CurrWeekOffset] ),
+                'Date'[WeekCompleted] = TRUE
+            )
+        VAR _Week = MAX( 'Date'[CurrWeekOffset] ) - 4
+        VAR _Result =
+            IF(
+                _Isdatesfiltered,
+                SELECTEDMEASURE( ),
+                CALCULATE(
+                    SELECTEDMEASURE( ),
+                    KEEPFILTERS(
+                        'Date'[CurrWeekOffset] >= _Week
+                            && 'Date'[CurrWeekOffset] <= _MaxWeek
+                    )
+                )
+            )
+        RETURN
+            _Result,
+    Ordinal = 3
+
+    CALCULATIONITEM "L12W" =
+        VAR _Isdatesfiltered =
+            CALCULATE( ISFILTERED( 'Date'[Date] ), ALLSELECTED( ) )
+        VAR _MaxWeek =
+            CALCULATE(
+                MAX( 'Date'[CurrWeekOffset] ),
+                'Date'[WeekCompleted] = TRUE
+            )
+        VAR _Week = MAX( 'Date'[CurrWeekOffset] ) - 12
+        VAR _Result =
+            IF(
+                _Isdatesfiltered,
+                SELECTEDMEASURE( ),
+                CALCULATE(
+                    SELECTEDMEASURE( ),
+                    KEEPFILTERS(
+                        'Date'[CurrWeekOffset] >= _Week
+                            && 'Date'[CurrWeekOffset] <= _MaxWeek
+                    )
+                )
+            )
+        RETURN
+            _Result,
+    Ordinal = 4
+
+    CALCULATIONITEM "All" =
+        VAR _Isdatesfiltered =
+            CALCULATE( ISFILTERED( 'Date'[Date] ), ALLSELECTED( ) )
+        VAR _Result =
+            IF(
+                _Isdatesfiltered,
+                SELECTEDMEASURE( ),
+                CALCULATE(
+                    SELECTEDMEASURE( ),
+                    REMOVEFILTERS( 'Date'[Date] )
+                )
+            )
+        RETURN
+            _Result,
+    Ordinal = 5
+
+    CALCULATIONITEM "Custom" =
+        VAR __Isdatesfiltered =
+            CALCULATE( ISFILTERED( 'Date'[Date] ), ALLSELECTED( ) )
+        VAR __Result =
+            IF(
+                __Isdatesfiltered,
+                SELECTEDMEASURE( ),
+                CALCULATE(
+                    SELECTEDMEASURE( ),
+                    REMOVEFILTERS( 'Date'[Date] )
+                )
+            )
+        RETURN
+            __Result,
+    Ordinal = 6
