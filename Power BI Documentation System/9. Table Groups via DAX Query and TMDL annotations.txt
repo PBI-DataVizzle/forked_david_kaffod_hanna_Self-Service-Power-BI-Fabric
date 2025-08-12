@@ -1,0 +1,33 @@
+// Author - David Kofod Hanna
+// Create DAX Query Table on Table Groups Feature in Tabular Editor from TMDL Annotations
+// Contact - https://www.linkedin.com/in/davidkofod/
+
+EVALUATE
+
+// Extract all table-level metadata: ID, Name, and Description
+VAR _tables =
+    SELECTCOLUMNS(
+        INFO.TABLES(),
+        "TableID", [ID],
+        "TableName", [Name],
+        "Description", [Description]
+    )
+
+// Extract annotations where the name matches "TabularEditor_TableGroup"
+// These annotations are assigned to tables via Tabular Editor scripts https://docs.tabulareditor.com/te3/features/table-groups.html#metadata-and-scripting
+// Alternatively, you can manually assign an annotation in TMDL view for each table/partition
+VAR _annotations =
+    SELECTCOLUMNS(
+        FILTER(
+            INFO.ANNOTATIONS(),
+            [Name] = "TabularEditor_TableGroup"
+        ),
+        "TableID", [ObjectID],
+        "Annotation Name", [Name],
+        "Annotation Value", [Value]
+    )
+
+// Join tables and annotations based on matching Table IDs
+RETURN
+    NATURALINNERJOIN(_tables, _annotations)
+    ORDER BY [Annotation Value]
