@@ -14,6 +14,7 @@ Here you'll find:
   - Tabular Editor automations
   - Governance practices
   - Modeling best practices
+  - Get started with PBIP, VS Code and Git
 
 ---
 
