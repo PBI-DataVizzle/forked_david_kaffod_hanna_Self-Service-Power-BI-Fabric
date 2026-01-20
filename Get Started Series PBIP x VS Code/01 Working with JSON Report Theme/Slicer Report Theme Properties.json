@@ -1,0 +1,99 @@
+        "slicer": {
+            "*": {
+                "general": [
+                    {
+                        "outlineWeight": 0,
+                        "keepLayerOrder": true
+                    }
+                ],
+                "data": [
+                    {
+                        "mode": "Dropdown"
+                    }
+                ],
+                "title": [
+                    {
+                        "show": false
+                    }
+                ],
+                "selection": [
+                    {
+                        "selectAllCheckboxEnabled": true,
+                        "singleSelect": false,
+                        "background": {
+                            "solid": {
+                                "color": "#ffffff"
+                            }
+                        }
+                    }
+                ],
+                "header": [
+                    {
+                        "show": true,
+                        "fontColor": {
+                            "solid": {
+                                "color": "#00304A"
+                            }
+                        },
+                        "fontSize": 12,
+                        "fontFamily": "Arial"
+                    }
+                ],
+                "items": [
+                    {
+                        "background": {
+                            "solid": {
+                                "color": "#FFFFFF"
+                            }
+                        },
+                        "fontColor": {
+                            "solid": {
+                                "color": "#00304A"
+                            }
+                        },
+                        "outline": "None",
+                        "textSize": 10,
+                        "fontFamily": "Arial"
+                    }
+                ],
+                "slider": [
+                    {
+                        "color": {
+                            "solid": {
+                                "color": "#00304A"
+                            }
+                        }
+                    },
+                    {
+                        "show": false
+                    }
+                ]
+            },
+            "Dropdown": {
+                "data": [
+                    {
+                        "mode": "Dropdown"
+                    }
+                ],
+                "selection": [
+                    {
+                        "singleSelect": false
+                    },
+                    {
+                        "selectAllCheckboxEnabled": true
+                    }
+                ]
+            },
+            "Tile Single": {
+                "data": [
+                    {
+                        "mode": "HorizontalList"
+                    }
+                ],
+                "selection": [
+                    {
+                        "strictSingleSelect": true
+                    }
+                ]
+            }
+        }
